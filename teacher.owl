@@ -1,0 +1,2951 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+    xmlns="http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sqwrl="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#"
+  xml:base="http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl">
+  <owl:Ontology rdf:about="">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An university ontology for benchmark tests</rdfs:comment>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >univ-bench-ontology-owl, ver April 1, 2004</owl:versionInfo>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >classified</owl:versionInfo>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Univ-bench Ontology</rdfs:label>
+    <owl:imports rdf:resource="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl"/>
+    <owl:imports rdf:resource="http://swrl.stanford.edu/ontologies/3.3/swrla.owl"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="College">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >大学</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="JournalArticle">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >journal article</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Article"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="FullProfessor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Professor"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >full professor</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="SystemsStaff">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AdministrativeStaff"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >systems staff worker</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="PostDoc">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Teacher"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >post doctorate</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Person">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >person</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="worksFor"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#Organization"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dirctor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Teacher"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="headOf"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Major"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="ResearchGroup">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >研究组</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="VisitingProfessor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Professor"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >visiting professor</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="ResearchAssistant">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >项目承担人员</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#worksFor"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#ResearchGroup"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Employee"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Research"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:TransitiveProperty rdf:ID="manage"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Major">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >系别</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Department"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Dean">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Person"/>
+          <owl:Restriction>
+            <owl:someValuesFrom rdf:resource="#College"/>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#headOf"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Professor"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >校长</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Employee">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >员工</rdfs:label>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Person"/>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class rdf:about="#Organization"/>
+            </owl:someValuesFrom>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#worksFor"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Chair">
+    <rdfs:subClassOf rdf:resource="#Person"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#Department"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#headOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Professor"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院长</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="AssistantProfessor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Professor"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >assistant professor</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Publication">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >publication</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Work"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ClericalStaff">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AdministrativeStaff"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >clerical staff worker</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Institute">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机构</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Work">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Work</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="ConferencePaper">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Article"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >conference paper</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Section">
+    <rdfs:comment xml:lang="en">部门</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Department">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学院</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Article">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >article</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Publication"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Organization">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >organization</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Research">
+    <rdfs:subClassOf rdf:resource="#Work"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:TransitiveProperty rdf:ID="manageOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#ResearchAssistant"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >research work</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Professor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Teacher"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >professor</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="TechnicalReport">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >technical report</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Article"/>
+  </owl:Class>
+  <owl:Class rdf:ID="UnofficialPublication">
+    <rdfs:subClassOf rdf:resource="#Publication"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >unnoficial publication</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Lecturer">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >lecturer</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Teacher"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="AssociateProfessor">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >associate professor</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Professor"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Teacher">
+    <rdfs:subClassOf rdf:resource="#Employee"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >faculty member</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#AdministrativeStaff">
+    <rdfs:subClassOf rdf:resource="#Employee"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >管理人员</rdfs:label>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="memberOf">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >member of</rdfs:label>
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:range rdf:resource="#Organization"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="member"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#member">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >has as a member</rdfs:label>
+    <rdfs:domain rdf:resource="#Organization"/>
+    <rdfs:range rdf:resource="#Person"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#worksFor">
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:subPropertyOf rdf:resource="#memberOf"/>
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Works For</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="takesCourse">
+    <rdfs:domain rdf:resource="#Teacher"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >is taking</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#headOf">
+    <rdfs:subPropertyOf rdf:resource="#worksFor"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >is the head of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="title">
+    <rdfs:domain rdf:resource="#Teacher"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >title</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="main_Achivement">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Teacher"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="school_Id">
+    <rdfs:domain rdf:resource="#College"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="name">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >name</rdfs:label>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Organization"/>
+          <owl:Class rdf:about="#Teacher"/>
+          <owl:Class rdf:about="#Publication"/>
+          <owl:Class rdf:about="#Work"/>
+          <owl:Class rdf:about="#ResearchAssistant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="pro_Num">
+    <rdfs:domain rdf:resource="#Research"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="school_Address">
+    <rdfs:domain rdf:resource="#College"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="with_Course">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Teacher"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="birthday">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >is age</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:domain rdf:resource="#Teacher"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="job">
+    <rdfs:domain rdf:resource="#Teacher"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="nation">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Teacher"/>
+          <owl:Class rdf:about="#ResearchAssistant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="password">
+    <rdfs:domain rdf:resource="#AdministrativeStaff"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="id">
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="user">
+    <rdfs:domain rdf:resource="#AdministrativeStaff"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="pro_Time">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >xiangmushijian</rdfs:comment>
+    <rdfs:domain rdf:resource="#Research"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sex">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Teacher"/>
+          <owl:Class rdf:about="#ResearchAssistant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >女</rdf:first>
+            <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+          </rdf:rest>
+          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+          >男</rdf:first>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="level">
+    <rdfs:domain rdf:resource="#Research"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="salary">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Teacher"/>
+          <owl:Class rdf:about="#ResearchAssistant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="teachingAssistantOf">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >is a teaching assistant for</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="teacherNumber">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >reacerNum</rdfs:label>
+    <rdfs:domain rdf:resource="#Teacher"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="workplace">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Teacher"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="researchInterest">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >professsion_dirction</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Teacher"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="workload">
+    <rdfs:range>
+      <owl:DataRange>
+        <owl:oneOf rdf:parseType="Resource">
+          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+          >1</rdf:first>
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+              >3</rdf:first>
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                >4</rdf:first>
+                <rdf:rest rdf:parseType="Resource">
+                  <rdf:rest rdf:parseType="Resource">
+                    <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                    >6</rdf:first>
+                    <rdf:rest rdf:parseType="Resource">
+                      <rdf:rest rdf:parseType="Resource">
+                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                        >8</rdf:first>
+                        <rdf:rest rdf:parseType="Resource">
+                          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                          >9</rdf:first>
+                          <rdf:rest rdf:parseType="Resource">
+                            <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                            >10</rdf:first>
+                            <rdf:rest rdf:parseType="Resource">
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                              >11</rdf:first>
+                              <rdf:rest rdf:parseType="Resource">
+                                <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                                >12</rdf:first>
+                                <rdf:rest rdf:parseType="Resource">
+                                  <rdf:rest rdf:parseType="Resource">
+                                    <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                                    >14</rdf:first>
+                                    <rdf:rest rdf:parseType="Resource">
+                                      <rdf:rest rdf:parseType="Resource">
+                                        <rdf:rest rdf:parseType="Resource">
+                                          <rdf:rest rdf:parseType="Resource">
+                                            <rdf:first rdf:datatype=
+                                            "http://www.w3.org/2001/XMLSchema#int"
+                                            >18</rdf:first>
+                                            <rdf:rest rdf:parseType="Resource">
+                                              <rdf:rest rdf:parseType="Resource">
+                                                <rdf:first rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#int"
+                                                >20</rdf:first>
+                                                <rdf:rest rdf:parseType="Resource">
+                                                  <rdf:first rdf:datatype=
+                                                  "http://www.w3.org/2001/XMLSchema#int"
+                                                  >21</rdf:first>
+                                                  <rdf:rest rdf:parseType="Resource">
+                                                    <rdf:rest rdf:parseType="Resource">
+                                                      <rdf:first
+                                                       rdf:datatype=
+                                                      "http://www.w3.org/2001/XMLSchema#int"
+                                                      >23</rdf:first>
+                                                      <rdf:rest rdf:parseType="Resource">
+                                                        <rdf:rest rdf:parseType="Resource">
+                                                          <rdf:first
+                                                           rdf:datatype=
+                                                          "http://www.w3.org/2001/XMLSchema#int"
+                                                          >25</rdf:first>
+                                                          <rdf:rest rdf:parseType="Resource">
+                                                            <rdf:rest rdf:parseType="Resource">
+                                                              <rdf:rest rdf:parseType="Resource">
+    <rdf:rest rdf:parseType="Resource">
+      <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+      >29</rdf:first>
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >30</rdf:first>
+        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+      </rdf:rest>
+    </rdf:rest>
+    <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >28</rdf:first>                                           </rdf:rest>
+                                                              <rdf:first
+                                                               rdf:datatype=
+                                                              "http://www.w3.org/2001/XMLSchema#int"
+                                                              >27</rdf:first>
+                                                            </rdf:rest>
+                                                            <rdf:first
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#int"
+                                                            >26</rdf:first>
+                                                          </rdf:rest>
+                                                        </rdf:rest>
+                                                        <rdf:first
+                                                         rdf:datatype=
+                                                        "http://www.w3.org/2001/XMLSchema#int"
+                                                        >24</rdf:first>
+                                                      </rdf:rest>
+                                                    </rdf:rest>
+                                                    <rdf:first
+                                                     rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#int"
+                                                    >22</rdf:first>
+                                                  </rdf:rest>
+                                                </rdf:rest>
+                                              </rdf:rest>
+                                              <rdf:first rdf:datatype=
+                                              "http://www.w3.org/2001/XMLSchema#int"
+                                              >19</rdf:first>
+                                            </rdf:rest>
+                                          </rdf:rest>
+                                          <rdf:first rdf:datatype=
+                                          "http://www.w3.org/2001/XMLSchema#int"
+                                          >17</rdf:first>
+                                        </rdf:rest>
+                                        <rdf:first rdf:datatype=
+                                        "http://www.w3.org/2001/XMLSchema#int"
+                                        >16</rdf:first>
+                                      </rdf:rest>
+                                      <rdf:first rdf:datatype=
+                                      "http://www.w3.org/2001/XMLSchema#int"
+                                      >15</rdf:first>
+                                    </rdf:rest>
+                                  </rdf:rest>
+                                  <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                                  >13</rdf:first>
+                                </rdf:rest>
+                              </rdf:rest>
+                            </rdf:rest>
+                          </rdf:rest>
+                        </rdf:rest>
+                      </rdf:rest>
+                      <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                      >7</rdf:first>
+                    </rdf:rest>
+                  </rdf:rest>
+                  <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                  >5</rdf:first>
+                </rdf:rest>
+              </rdf:rest>
+            </rdf:rest>
+            <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >2</rdf:first>
+          </rdf:rest>
+        </owl:oneOf>
+      </owl:DataRange>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#Teacher"/>
+  </owl:DatatypeProperty>
+  <owl:TransitiveProperty rdf:about="#manageOf">
+    <rdfs:range rdf:resource="#ResearchAssistant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf>
+      <owl:TransitiveProperty rdf:about="#manage"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Research"/>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:about="#manage">
+    <rdfs:range rdf:resource="#Research"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="#ResearchAssistant"/>
+    <owl:inverseOf rdf:resource="#manageOf"/>
+  </owl:TransitiveProperty>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#least"/>
+  <Person rdf:ID="王万智">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >7</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6300.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >25</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院长助理系主任</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王万智</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1962-12-07</birthday>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >英语</researchInterest>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院办</workplace>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notNthLast"/>
+  <Person rdf:ID="谢涛">
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4100.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机网络、服务器配置</researchInterest>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机网络教研室秘书</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >37</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >谢涛</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1977-05-11</birthday>
+  </Person>
+  <Person rdf:ID="赵阶晨">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >64</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4000.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1974-11-19</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >赵阶晨</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >3D动画设计</researchInterest>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >24</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+  </Person>
+  <Person rdf:ID="顾海平">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >顾海平</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6500.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >9</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1965-12-07</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >27</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >实践教学中心</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副院长</job>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级工程师</title>
+  </Person>
+  <Person rdf:ID="樊复生">
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教务处</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教授</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6200.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >25</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >3</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1945-10-07</birthday>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >数学</researchInterest>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >樊复生</name>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副院长</job>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notNthGreatest"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#sum"/>
+  <Person rdf:ID="牛少杰">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >25</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >59</id>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-06-14</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4150.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电子信息工程、电子技术基础</researchInterest>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >牛少杰</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+  </Person>
+  <Person rdf:ID="吴燕">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4550.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-02-21</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >42</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >吴燕</name>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#isEmpty"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notGreatestN"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#greatest"/>
+  <Person rdf:ID="赵惠娥">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1962-11-07</birthday>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院长</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >赵惠娥</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6870.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级经济师</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >0</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院办</workplace>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#avg"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#nthSlice"/>
+  <Person rdf:ID="马丽">
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5000.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副处长</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >24</workload>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >大学语文、应用文写作</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1981-10-16</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >21</id>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >马丽</name>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <Person rdf:ID="常会丽">
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机</researchInterest>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >常会丽</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1978-03-14</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >58</id>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助理工程师</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4350.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >25</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+  </Person>
+  <Person rdf:ID="马俊涛">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >60</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >马俊涛</name>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >物理电气</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-02-14</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+  </Person>
+  <Person rdf:ID="杨燕">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >杨燕</name>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1984-07-07</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >24</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >心理健康教育中心主任</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >心理健康教育</researchInterest>
+  </Person>
+  <Person rdf:ID="王庆月">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王庆月</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1978-05-23</birthday>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >flash动画设计</researchInterest>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >52</id>
+  </Person>
+  <Person rdf:ID="王学军">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >23</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王学军</name>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1984-06-05</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >84</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#nthLast"/>
+  <Person rdf:ID="李晓玉">
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4500.0</salary>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >95</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1981-04-22</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >满</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >李晓玉</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >8</workload>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#append"/>
+  <Person rdf:ID="芦晓瑞">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4500.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >芦晓瑞</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >国际贸易专业、国际贸易实务、单证实务、市场营销</researchInterest>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1976-09-20</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >91</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >国际贸易教研室主任</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >16</workload>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#nthGreatestSlice"/>
+  <Person rdf:ID="席春霞">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经济师讲师</title>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1967-04-11</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >席春霞</name>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副主任</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >87</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >会计学、电算化会计</researchInterest>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4150.0</salary>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#count"/>
+  <Person rdf:ID="张春兰">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >82</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1964-12-17</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3900.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级工程师</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程材料及热加工</researchInterest>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >24</workload>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >张春兰</name>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notEmpty"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#groupBy"/>
+  <Person rdf:ID="王顺">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >无</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王顺</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1990-07-21</birthday>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SB</researchInterest>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >28</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >40109124</id>
+    <password rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ws153,.</password>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程学院</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >管理员</job>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4000.0</salary>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notNthSlice"/>
+  <Person rdf:ID="黄彦丽">
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >16</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1980-02-19</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教二级</title>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >94</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4350.0</salary>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></nation>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notLeastN"/>
+  <Person rdf:ID="刘超">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1980-01-22</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5200.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >刘超</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机科学与技术、信息检索、操作实战</researchInterest>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >27</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >50</id>
+  </Person>
+  <Person rdf:ID="张玲">
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4550.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >材料加工工程</researchInterest>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >张玲</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-12-29</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >83</id>
+  </Person>
+  <Person rdf:ID="秦敏">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1955-05-23</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >71</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级工程师</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4750.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >秦敏</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械专业、机械原理、机械设计基础</researchInterest>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >热能与动力工程教研室秘书</job>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notNthGreatestSlice"/>
+  <Person rdf:ID="牛文娟">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1984-12-12</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >物流营销专业、管理学、市场营销、供应链管理</researchInterest>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >43</id>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >牛文娟</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4400.0</salary>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+  </Person>
+  <Person rdf:ID="张淼">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >75</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >张淼</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1986-05-22</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#nthGreatest"/>
+  <Person rdf:ID="郝世栋">
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院办</workplace>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教授</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >郝世栋</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1952-12-07</birthday>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >28</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6750.0</salary>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副院长</job>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#nthLastSlice"/>
+  <Person rdf:ID="郭莹">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >C语言编程</researchInterest>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >处长</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教务处</workplace>
+    <nation xml:lang="en">汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >15</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6400.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1979-07-16</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >郭莹</name>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notNthLastSlice"/>
+  <Person rdf:ID="柯小霞">
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副主任</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1978-02-20</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >柯小霞</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >88</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >19</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >会计专业、财务会计、税法、税务会计</researchInterest>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4250.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <Person rdf:ID="孙国金">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1986-01-12</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >孙国金</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >信息与计算机科学</researchInterest>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4000.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >16</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >40</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+  </Person>
+  <Person rdf:ID="刘学义">
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >党建组织员</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >28</workload>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >培养入党人士</researchInterest>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >68</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3750.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >刘学义</name>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高教</title>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1954-08-08</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+  </Person>
+  <Person rdf:ID="葛占祥">
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >办公室主任</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >10</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >政工师</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6540.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >葛占祥</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院办</workplace>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1953-09-27</birthday>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notFirstN"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notElement"/>
+  <Person rdf:ID="徐晓君">
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >C语言和软件工程</researchInterest>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-09-26</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >26</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >53</id>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >徐晓君</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4300.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#intersects"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notIntersects"/>
+  <Person rdf:ID="王仁德">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王仁德</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教授</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5600.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1946-10-31</birthday>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >80</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+  </Person>
+  <Person rdf:ID="何耀锋">
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4900.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >平面设计课程</researchInterest>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >何耀锋</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >16</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1981-12-07</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >33</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >办公室主任</job>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+  </Person>
+  <Person rdf:ID="吕杰">
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5400.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1974-02-18</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教一级</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >62</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >单片机嵌入式</researchInterest>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >吕杰</name>
+  </Person>
+  <Person rdf:ID="刘学云">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >19</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >处长</job>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1972-07-18</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >刘学云</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5200.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电子商务、市场营销、网络营销</researchInterest>
+  </Person>
+  <Person rdf:ID="刘振华">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >刘振华</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >土木工程材料</researchInterest>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1980-07-09</birthday>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >24</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5420.0</salary>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >13</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >人事处</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >处长</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+  </Person>
+  <Person rdf:ID="杨仁远">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5350.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >杨仁远</name>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1972-04-16</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副处长</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >20</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >体育教育</researchInterest>
+  </Person>
+  <Person rdf:ID="马萍">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >44</id>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >马萍</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-07-18</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4450.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notEqual"/>
+  <Person rdf:ID="王志宇">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王志宇</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >79</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5200.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级工程师</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1944-10-30</birthday>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械制造技术、工程经济、财政学等</researchInterest>
+  </Person>
+  <Person rdf:ID="方丽娟">
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >主任</job>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3950.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >25</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >方丽娟</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >86</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >会计学专业、财务会计、财务管理</researchInterest>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1969-08-19</birthday>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notGreatest"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#orderByDescending"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notLeast"/>
+  <Person rdf:ID="祁彬">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >祁彬</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >8</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副院长</job>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6300.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >23</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1966-02-07</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >基建部</workplace>
+  </Person>
+  <Person rdf:ID="吴俊莉">
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5230.0</salary>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >14</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1982-07-27</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >吴俊莉</name>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >人事处</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >人事处干事</job>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >11</workload>
+  </Person>
+  <Person rdf:ID="陈世杰">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></title>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >陈世杰</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >党建组织员</job>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1954-04-06</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >90</id>
+  </Person>
+  <Person rdf:ID="许金富">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >26</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气工程、自动化</researchInterest>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4250.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教授</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1947-09-18</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >49</id>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >许金富</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+  </Person>
+  <Person rdf:ID="杨惠侠">
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3700.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >78</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >27</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1947-11-26</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >杨惠侠</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >内燃机车、机械制图</researchInterest>
+  </Person>
+  <Person rdf:ID="丛杏滋">
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >内燃机构造、泵与燃机</researchInterest>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汽车服务工程教研室主任</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >29</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5800.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >丛杏滋</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >69</id>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <teacherNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></teacherNumber>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1943-08-24</birthday>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#min"/>
+  <Person rdf:ID="李虹">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >李虹</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院办</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >14</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1972-05-16</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5430.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >办公室副主任</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >11</id>
+  </Person>
+  <Person rdf:ID="周红丽">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1974-07-15</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >周红丽</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电路、电子技术</researchInterest>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4200.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副主任</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >32</id>
+  </Person>
+  <Person rdf:ID="苏海鹏">
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >办公室主任</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-08-17</birthday>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >苏海鹏</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >89</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >国际经济与贸易</researchInterest>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4300.0</salary>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#leastN"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#select"/>
+  <Person rdf:ID="冯月春">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1979-05-20</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机应用、计算机专业英语</researchInterest>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4550.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >冯月春</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >55</id>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <College rdf:ID="北方名族大学">
+    <school_Address rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></school_Address>
+  </College>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#makeBag"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#greatestN"/>
+  <Person rdf:ID="牛志军">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >25</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4560.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电工类、数控类</researchInterest>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1978-10-21</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >30</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副处长</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >设备管理处</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >牛志军</name>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教/二级技师</title>
+  </Person>
+  <Person rdf:ID="孟天祥">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级工程师</title>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >23</workload>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >工程制图、公差与配合</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4500.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >孟天祥</name>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1954-12-22</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >81</id>
+  </Person>
+  <Person rdf:ID="王亮刚">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >23</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生管理科科长</job>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王亮刚</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1982-11-07</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >23</id>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5200.0</salary>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notLast"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#selectDistinct"/>
+  <Person rdf:ID="毕可秀">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >25</id>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >毕可秀</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >工程制图、金属工艺学等</researchInterest>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >支部书记</job>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1944-02-07</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4750.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#columnNames"/>
+  <Person rdf:ID="关清凡">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >4</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >培养人才</researchInterest>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副院长</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >关清凡</name>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1961-12-07</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >培训部</workplace>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5160.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >26</workload>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#orderBy"/>
+  <Person rdf:ID="李福梅">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-06-18</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4700.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >心理学</researchInterest>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >李福梅</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >28</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >96</id>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#lastN"/>
+  <Person rdf:ID="何阿娟">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1986-02-11</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >28</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >宣传部</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >广告宣传</researchInterest>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >干事</job>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4500.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >何阿娟</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <Person rdf:ID="彭静">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >彭静</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-11-19</birthday>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >音乐教育、舞蹈、健美操</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >76</id>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#union"/>
+  <College rdf:ID="宁夏理工学院"/>
+  <Person rdf:ID="孙娜">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4450.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1980-10-21</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >孙娜</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >66</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副主任</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+  </Person>
+  <Person rdf:ID="李世长">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级政工师</title>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1949-11-07</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >李世长</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >满</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >党办</workplace>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5250.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >23</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >6</id>
+  </Person>
+  <Person rdf:ID="赵伏军">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-04-18</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4690.0</salary>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >27</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >赵伏军</name>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >干事</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >宣传部</workplace>
+  </Person>
+  <Person rdf:ID="贾培英">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1966-03-17</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >贾培英</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >主任</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >65</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5200.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械制造专业、CAD、机制工艺等</researchInterest>
+  </Person>
+  <Person rdf:ID="吴伟">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1981-06-01</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教一级</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >党支部书记</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >吴伟</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4400.0</salary>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >35</id>
+  </Person>
+  <Person rdf:ID="葛延津">
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1945-09-07</birthday>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >葛延津</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教授</title>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气自动化专业、自动控制原理</researchInterest>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >47</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+  </Person>
+  <Person rdf:ID="刘志明">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >刘志明</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6500.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教高级</title>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1956-12-07</birthday>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >27</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副院长</job>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >5</id>
+  </Person>
+  <Person rdf:ID="苗楠">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >24</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-04-20</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >苗楠</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >85</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5000.0</salary>
+  </Person>
+  <Person rdf:ID="马辉">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1984-07-19</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >36</id>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3900.0</salary>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >马辉</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教育技术学、《教育学》</researchInterest>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >党支部副书记</job>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#first"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#limit"/>
+  <Person rdf:ID="严海领">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >63</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1984-12-16</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4750.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教一级</title>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机</researchInterest>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >严海领</name>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#difference"/>
+  <Person rdf:ID="周倩">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >周倩</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >广告学</researchInterest>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4000.0</salary>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >93</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >17</workload>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉族</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教一级</title>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1987-04-09</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+  </Person>
+  <Person rdf:ID="薛继汉">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >薛继汉</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >24</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1937-11-17</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教授</title>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电路原理、电机与拖动、专业英语</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4200.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >48</id>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+  </Person>
+  <Person rdf:ID="张翠玲">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4520.0</salary>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >路、电子技术</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >31</id>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >张翠玲</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1971-12-07</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >主任</job>
+  </Person>
+  <Person rdf:ID="宋尚军">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >办公室副主任</job>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1975-12-24</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >院办</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >12</id>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >宋尚军</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5300.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教二级</title>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notLastN"/>
+  <Person rdf:ID="欧阳明辉">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >16</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >92</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >物流管理</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3600.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-05-23</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >市场营销教研室主任</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >欧阳明辉</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+  </Person>
+  <Person rdf:ID="李玉成">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >45</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >2</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >李玉成</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5200.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1943-05-11</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+  </Person>
+  <Person rdf:ID="杨贺绪">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >67</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >办公室主任</job>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助工</title>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >杨贺绪</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3900.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械设计、PIO/E</researchInterest>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1982-06-14</birthday>
+  </Person>
+  <Person rdf:ID="王元芳">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教一级</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >部长</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王元芳</name>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1962-10-07</birthday>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >大学语文、应用文写作</researchInterest>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >26</id>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >28</workload>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4750.0</salary>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >宣传部</workplace>
+  </Person>
+  <Person rdf:ID="张晓敏">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >17</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4100.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >57</id>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >张晓敏</name>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >美术教育学、水粉、设计素描</researchInterest>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1982-11-18</birthday>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#contains"/>
+  <Person rdf:ID="刘丽梅">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >刘丽梅</name>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程及自动化教研室主任</job>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1965-08-08</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级工程师</title>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >29</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5600.0</salary>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >70</id>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械专业、机械制图、机械材料等</researchInterest>
+  </Person>
+  <Person rdf:ID="孙蕾蕾">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1989-03-08</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >孙蕾蕾</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >77</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4200.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+  </Person>
+  <Person rdf:ID="焦玫">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >39</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教学秘书</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-05-07</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4500.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >焦玫</name>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电子技术</researchInterest>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#element"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#median"/>
+  <Person rdf:ID="王强">
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >19</workload>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >17</id>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1979-06-07</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教务处</workplace>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械自动化专业、数控编程技术</researchInterest>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5800.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王强</name>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副主任</job>
+  </Person>
+  <Person rdf:ID="莫园之">
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机科学与技术</researchInterest>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >61</id>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >3</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4750.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1985-05-21</birthday>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >莫园之</name>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+  </Person>
+  <Person rdf:ID="李永宁">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >高级工程师</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >工程力学</researchInterest>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >72</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教学秘书</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >李永宁</name>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5200.0</salary>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1966-12-08</birthday>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >27</workload>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notContains"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#intersection"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#max"/>
+  <Person rdf:ID="李承萱">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >46</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1940-11-11</birthday>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副教授</title>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >李承萱</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5000.0</salary>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#makeSet"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notNth"/>
+  <Person rdf:ID="马云">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6000.0</salary>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >马云</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >16</id>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教务处</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >27</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >副处长</job>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >程序设计语言、数据结构</researchInterest>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1971-12-23</birthday>
+  </Person>
+  <Person rdf:ID="花侃侃">
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >融成教育</researchInterest>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1882-11-07</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >22</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >思想政治教育科科长</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >花侃侃</name>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学生处</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >5230.0</salary>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></title>
+  </Person>
+  <Person rdf:ID="邵雪花">
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >机械工程系</workplace>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4200.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >邵雪花</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >74</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-10-30</birthday>
+  </Person>
+  <Person rdf:ID="郭燕霞">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1972-04-11</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >6200.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >18</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >18</id>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >郭燕霞</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >学籍学位管理科科长</job>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教务处</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</nation>
+  </Person>
+  <Person rdf:ID="谷佳">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >谷佳</name>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >51</id>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4800.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1983-04-17</birthday>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >26</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >广告、广告学概论</researchInterest>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#nth"/>
+  <Person rdf:ID="吴曼">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1982-04-06</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >经管系</workplace>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >吴曼</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >97</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >思想政治教育、承担“概论”教学工作</researchInterest>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >21</workload>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3850.0</salary>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+  </Person>
+  <Person rdf:ID="周金莲">
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1978-11-20</birthday>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</workload>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >周金莲</name>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >38</id>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机科学与技术、多媒体技术</researchInterest>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3900.0</salary>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教学秘书</job>
+  </Person>
+  <Person rdf:ID="王海荣">
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >讲师</title>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >34</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机科学与技术教研室主任</job>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4300.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >26</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机科学与技术、软件工程</researchInterest>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >王海荣</name>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1977-08-08</birthday>
+  </Person>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#size"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#firstN"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#equal"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#notFirst"/>
+  <College rdf:ID="宁夏大学"/>
+  <swrl:Builtin rdf:about="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#last"/>
+  <Person rdf:ID="付亚超">
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >宣传广告</researchInterest>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >付亚超</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >干事</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >29</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1987-01-11</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4600.0</salary>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >宣传部</workplace>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >回</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >23</workload>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >中教一级</title>
+  </Person>
+  <Person rdf:ID="马旭明">
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4050.0</salary>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >23</workload>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >马旭明</name>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >男</sex>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1986-04-07</birthday>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >56</id>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >计算机科学与技术、广域网基础、计算机应用基础</researchInterest>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+  </Person>
+  <Person rdf:ID="宿冰">
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >多媒体艺术设计、动画制作、FLASH动画制作</researchInterest>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1981-11-11</birthday>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >宿冰</name>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉族</nation>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >教师</job>
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >54</id>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >3900.0</salary>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+  </Person>
+  <Person rdf:ID="孙建艳">
+    <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >41</id>
+    <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >1986-04-08</birthday>
+    <salary rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >4500.0</salary>
+    <nation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >汉</nation>
+    <workload rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >22</workload>
+    <workplace rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >电气信息工程系</workplace>
+    <job rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >辅导员</job>
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >孙建艳</name>
+    <researchInterest rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >艺术设计</researchInterest>
+    <sex rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >女</sex>
+    <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >助教</title>
+  </Person>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.7, Build 620)  http://protege.stanford.edu -->
